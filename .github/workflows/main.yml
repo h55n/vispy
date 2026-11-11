@@ -27,6 +27,9 @@ jobs:
       run:
         shell: bash --login -e {0}
     steps:
+    - name: Use HTTPS Ubuntu package mirrors
+      run: |
+        sudo sed -i 's|http://azure.archive.ubuntu.com|https://archive.ubuntu.com|g; s|http://archive.ubuntu.com|https://archive.ubuntu.com|g; s|http://security.ubuntu.com|https://security.ubuntu.com|g' /etc/apt/sources.list.d/ubuntu.sources
     - name: Install OpenGL
       run: |
         sudo apt-get update
@@ -92,6 +95,9 @@ jobs:
         key: ${{ runner.os }}-data-${{ env.cache-name }}-${{ env.test-version }}
         restore-keys: |
           ${{ runner.os }}-data-${{ env.cache-name }}-
+    - name: Use HTTPS Ubuntu package mirrors
+      run: |
+        sudo sed -i 's|http://azure.archive.ubuntu.com|https://archive.ubuntu.com|g; s|http://archive.ubuntu.com|https://archive.ubuntu.com|g; s|http://security.ubuntu.com|https://security.ubuntu.com|g' /etc/apt/sources.list.d/ubuntu.sources
     - name: Prepare System Environment
       id: vars
       # This is added because lately it happened more than once that ubuntu mirrors are slow and run for more than 2h
@@ -199,6 +205,9 @@ jobs:
         key: ${{ runner.os }}-data-${{ env.cache-name }}-${{ env.test-version }}
         restore-keys: |
           ${{ runner.os }}-data-${{ env.cache-name }}-
+    - name: Use HTTPS Ubuntu package mirrors
+      run: |
+        sudo sed -i 's|http://azure.archive.ubuntu.com|https://archive.ubuntu.com|g; s|http://archive.ubuntu.com|https://archive.ubuntu.com|g; s|http://security.ubuntu.com|https://security.ubuntu.com|g' /etc/apt/sources.list.d/ubuntu.sources
     - name: Prepare System Environment
       id: vars
       # This is added because lately it happened more than once that ubuntu mirrors are slow and run for more than 2h
